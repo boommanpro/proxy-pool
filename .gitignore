@@ -1,0 +1,9 @@
+
+### IntelliJ IDEA ###
+.idea
+*.iml
+!generator/Readme.md
+
+### Java Template ###
+
+/src/main/resources/rebel.xml
