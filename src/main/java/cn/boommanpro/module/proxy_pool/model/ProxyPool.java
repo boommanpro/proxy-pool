@@ -3,7 +3,6 @@ package cn.boommanpro.module.proxy_pool.model;
 import cn.boommanpro.module.proxy_pool.type.AnonymityType;
 import cn.boommanpro.module.proxy_pool.type.HttpType;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 /**
 * Created by Mybatis Generator 2019/02/23

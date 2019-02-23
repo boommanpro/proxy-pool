@@ -18,8 +18,12 @@ public class XiciParseUtil {
     private static final String HIGH = "高匿";
     private static final String HTTPS = "HTTPS";
 
-    public static List<ProxyPool> parse2ProxyPoolList(String context) {
-        XiciModel xiciModel = new Fruit().fromHtml(context, XiciModel.class);
+
+    public static XiciModel parseModel(String context) {
+        return new Fruit().fromHtml(context, XiciModel.class);
+    }
+
+    public static List<ProxyPool> parse2ProxyPoolList(XiciModel xiciModel) {
 
         List<XiciModel.XiciRow> pageData = xiciModel.getPageData();
         return pageData.stream().map(xiciRow -> {

@@ -1,0 +1,23 @@
+# \u670D\u52A1\u7AEF\u53E3
+server:
+  port: 8180
+
+
+proxy-pool:
+  # \u670D\u52A1\u5668\u5730\u5740
+  url: www.boommanpro.cn
+
+db:
+  proxy-pool:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://${proxy-pool.url}:3306/db_proxy_pool?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=CTT
+    username: root
+    password: root
+    maximum-pool-size: 20
+
+# \u65E5\u5FD7\u914D\u7F6E
+logging:
+  level:
+    cn.boommanpro: debug
+    org.springframework: WARN
+    org.spring.springboot.dao: debug

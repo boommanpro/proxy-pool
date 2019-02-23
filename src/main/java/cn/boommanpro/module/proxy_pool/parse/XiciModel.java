@@ -14,6 +14,8 @@ import java.util.List;
 public class XiciModel {
     @Pick("#ip_list tr:gt(0)")
     private List<XiciRow> pageData;
+    @Pick(value = ".next_page",attr = "rel")
+    private String nextPage;
 
     @Data
     public static class XiciRow{

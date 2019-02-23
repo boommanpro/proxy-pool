@@ -1,5 +1,6 @@
 package cn.boommanpro.module.proxy_pool.parse;
 
+import cn.boommanpro.common.HeaderUtils;
 import cn.boommanpro.module.proxy_pool.model.ProxyPool;
 import cn.boommanpro.module.proxy_pool.type.HttpType;
 import cn.boommanpro.module.proxy_pool.validate.ValidateProxy;
@@ -14,8 +15,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @author BoomManPro
@@ -37,9 +36,9 @@ public class XiciParseUtilTest {
 
         OkHttpClient client = new OkHttpClient();
 
-        Headers headers=new Headers.Builder()
-                .add("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36")
-                .add("Host","www.xicidaili.com")
+        Headers headers = new Headers.Builder()
+                .addAll(HeaderUtils.defaultHeaders())
+                .add("Host", "www.xicidaili.com")
                 .build();
 
         Request request = new Request.Builder().headers(headers)
@@ -47,7 +46,8 @@ public class XiciParseUtilTest {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String  result=response.body().string();
-            List<ProxyPool> proxyPoolList = XiciParseUtil.parse2ProxyPoolList(result);
+            XiciModel xiciModel = XiciParseUtil.parseModel(result);
+            List<ProxyPool> proxyPoolList = XiciParseUtil.parse2ProxyPoolList(xiciModel);
             for (ProxyPool proxyPool : proxyPoolList) {
                 boolean validate = ValidateProxy.validate(proxyPool);
                 System.out.println(proxyPool+"校验结果"+validate);
@@ -65,7 +65,8 @@ public class XiciParseUtilTest {
         in.read(fileContent);
         in.close();
         String htmlContent = new String(fileContent);
-        List<ProxyPool> proxyPoolList = XiciParseUtil.parse2ProxyPoolList(htmlContent);
+        XiciModel xiciModel = XiciParseUtil.parseModel(htmlContent);
+        List<ProxyPool> proxyPoolList = XiciParseUtil.parse2ProxyPoolList(xiciModel);
         for (ProxyPool proxyPool : proxyPoolList) {
             boolean validate = ValidateProxy.validate(proxyPool);
             System.out.println(proxyPool+"校验结果"+validate);
@@ -77,9 +78,9 @@ public class XiciParseUtilTest {
     @Test
     public void validate(){
         ProxyPool proxyPool = new ProxyPool();
-        proxyPool.setIp("116.209.58.17");
+        proxyPool.setIp("171.80.174.39");
         proxyPool.setPort(9999);
-        proxyPool.setType(HttpType.HTTP);
+        proxyPool.setType(HttpType.HTTPS);
         boolean validate = ValidateProxy.validate(proxyPool);
         System.out.println(proxyPool+"校验结果"+validate);
     }

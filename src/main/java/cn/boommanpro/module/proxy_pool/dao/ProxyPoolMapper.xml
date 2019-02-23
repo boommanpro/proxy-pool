@@ -133,4 +133,17 @@
       `type` = #{type,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <insert id="batchInsert" >
+    <choose>
+      <when test="null != proxyPoolList and proxyPoolList.size > 0">
+        insert ignore into  proxy_pool ( ip, port,country, anonymity, `type`) values
+        <foreach collection="proxyPoolList" item="proxyItem" separator=",">
+          (#{proxyItem.ip} ,#{proxyItem.port} ,#{proxyItem.country} ,#{proxyItem.anonymity} ,#{proxyItem.type} )
+        </foreach>
+      </when>
+      <otherwise>
+        select 0
+      </otherwise>
+    </choose>
+  </insert>
 </mapper>
