@@ -146,4 +146,9 @@
       </otherwise>
     </choose>
   </insert>
+    <select id="listAll" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from proxy_pool
+    </select>
 </mapper>

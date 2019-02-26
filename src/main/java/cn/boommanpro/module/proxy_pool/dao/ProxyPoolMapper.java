@@ -24,4 +24,6 @@ public interface ProxyPoolMapper {
     int updateByPrimaryKey(ProxyPool record);
 
     int batchInsert(@Param("proxyPoolList") List<ProxyPool> proxyPoolList);
+
+    List<ProxyPool> listAll();
 }

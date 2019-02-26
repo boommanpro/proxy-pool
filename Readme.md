@@ -3,7 +3,8 @@
 一个极其简单的proxy-pool项目
 
 
-## 代理爬取网站
+## 已解析添加的网站
+
 
 1.[西刺代理](https://www.xicidaili.com/)
 
@@ -35,6 +36,7 @@ Jquery选择器参考手册:http://www.w3school.com.cn/jquery/jquery_ref_selecto
 ![503](https://img-blog.csdnimg.cn/20190223110108470.png)
 
 
+### 下面是之后待添加的
 
 
 <table>

@@ -14,6 +14,8 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.List;
 
 /**
@@ -34,7 +36,10 @@ public class XiciParseUtilTest {
     public void requestTest() throws IOException{
         String url = "https://www.xicidaili.com/nn/1";
 
-        OkHttpClient client = new OkHttpClient();
+
+
+        OkHttpClient client =  new OkHttpClient.Builder()
+                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("116.209.59.30", 9999))).build();
 
         Headers headers = new Headers.Builder()
                 .addAll(HeaderUtils.defaultHeaders())
@@ -75,12 +80,14 @@ public class XiciParseUtilTest {
     }
 
 
+//    ProxyPool(id=10, ip=116.209.59.30, port=9999, country=湖北仙桃, anonymity=HIGH, type=HTTP)校验结果true
+
     @Test
     public void validate(){
         ProxyPool proxyPool = new ProxyPool();
-        proxyPool.setIp("171.80.174.39");
+        proxyPool.setIp("116.209.59.30");
         proxyPool.setPort(9999);
-        proxyPool.setType(HttpType.HTTPS);
+        proxyPool.setType(HttpType.HTTP);
         boolean validate = ValidateProxy.validate(proxyPool);
         System.out.println(proxyPool+"校验结果"+validate);
     }
